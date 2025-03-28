@@ -9,8 +9,13 @@
   <body>
     <div id="div-busca">
       <p>Encontre os Melhores Profissionais</p>
-      <BarraPesquisa></BarraPesquisa>
-      <BotaoQuadrado></BotaoQuadrado>
+      <BarraPesquisa />
+      <BotaoQuadrado :texto="'BUSCAR'" :cor="'var(--cor-laranja)'" />
+    </div>
+    <div>
+      <div id="div-categorias">
+        <h1>Categorias Populares</h1>
+      </div>
     </div>
   </body>
 </template>
@@ -18,7 +23,7 @@
 <style scoped>
 
   #div-busca{
-    background-color: blue;
+    background-color: var(--cor-azul);
     color: white;
     text-align: center;
     padding: 20px;

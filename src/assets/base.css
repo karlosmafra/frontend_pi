@@ -1,8 +1,16 @@
+:root {
+    --cor-azul-escuro: #00678a;
+    --cor-azul: #02a0c6;
+    --cor-laranja: #ff914d;
+    --cor-fundo: #fff9ed;
+  }
+
 * {
     margin: 0px;
     padding: 0px;
+    border: none;
 }
 
 body {
-    background-color: aliceblue;
+    background-color: var(--cor-fundo);
 }

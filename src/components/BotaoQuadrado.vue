@@ -1,18 +1,28 @@
 <script setup>
 import { ref } from 'vue';
 
-const texto = "botao"
+const props = defineProps({
+    texto: String,
+    cor: {
+        type: String,
+        default: "var(--cor-laranja)"
+    }
+}) 
 
 </script>
 
 <template>
-    <button>{{texto}}</button>
+    <button>{{props.texto}}</button>
 </template>
 
 <style scoped>
 
     button{
         border-radius: 0px;
+        border: 0px;
+        padding: 5px;
+        color: #ffffff;
+        background-color: v-bind(cor);
     }
 
 </style>
