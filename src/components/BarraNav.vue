@@ -1,13 +1,13 @@
 <script setup>
     import { RouterLink } from 'vue-router'
-    import Logo from '@/assets/img/logo-240.png'
+    import Logo from '@/assets/img/logo-177.png'
 </script>
 
 <template>
     
     <nav>
          <div class="container" id="container-img">
-           <!-- <img :src="Logo" alt="Logo">-->
+           <img :src="Logo" alt="Logo">
          </div>
         <div class="container" id="container-links">
             <RouterLink to="/">Home</RouterLink>
@@ -24,12 +24,14 @@
     nav {
         display: flex;
         justify-content: space-between;
+        align-items: center;
         background-color: var(--cor-azul-escuro);
-        padding: 25px;
+        padding: 20px;
     }
 
     .container {
-        display: inline-block;
+        display: flex;
+        align-items: center;
     }
 
     a {
