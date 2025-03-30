@@ -11,7 +11,7 @@
          </div>
         <div class="container" id="container-links">
             <RouterLink to="/">Home</RouterLink>
-            <RouterLink to="/">Serviços</RouterLink>
+            <RouterLink to="/servicos">Serviços</RouterLink>
             <RouterLink to="/">Contato</RouterLink>
         </div>
     </nav>

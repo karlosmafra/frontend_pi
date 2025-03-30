@@ -1,12 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Chau+Philomene:wght@400;600&display=swap');
+
 :root {
     --cor-azul-escuro: #00678a;
     --cor-azul: #02a0c6;
     --cor-laranja: #ff914d;
     --cor-fundo: #fff9ed;
-    --fonte-padrao: 'Poppins', sans-serif;
+    --fonte-padrao: 'Open Sans', sans-serif;
   }
 
 * {
+    font-family: var(--fonte-padrao);
+    font-weight: bold;
     margin: 0px;
     padding: 0px;
     border: none;
@@ -14,5 +18,4 @@
 
 body {
     background-color: var(--cor-fundo);
-    font-family: var(--fonte-padrao);
 }

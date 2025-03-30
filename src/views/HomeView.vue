@@ -64,7 +64,6 @@
   #div-categorias-botoes button {
     aspect-ratio: 7 / 2;
     width: 100%; 
-    min-width: 150px; 
     max-width: 320px;
     font-size: 2rem;
   }
