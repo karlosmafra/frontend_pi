@@ -44,13 +44,14 @@
 
     input {
         width: 860px;
-        height: 35px;
+        height: 40px;
         margin-right: 15px;
     }
 
     button {
         width: 160px;
-        height: 35px;
+        height: 40px;
+        font-size: 1em;
     }
 
     @media (max-width: 768px) {
