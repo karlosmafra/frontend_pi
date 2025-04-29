@@ -23,7 +23,7 @@
 <style scoped>
 
   #div-categorias{
-    max-width: 1500px; 
+    max-width: 1400px; 
     margin: auto;
   }
 
@@ -65,7 +65,7 @@
     aspect-ratio: 7 / 2;
     width: 100%; 
     max-width: 320px;
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
 
 </style>
