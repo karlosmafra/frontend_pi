@@ -11,7 +11,7 @@ import AreaCadastro from '@/components/AreaCadastro.vue';
 
         </AreaCadastro>
         <div class="area-direita">
-            <!-- <img src="../assets/img/logo.png" alt=""> -->
+            <img src="../assets/img/logo_azul_4.png" alt="logo_skill_match">
         </div>
     </div>
 
@@ -33,7 +33,10 @@ import AreaCadastro from '@/components/AreaCadastro.vue';
     }
 
     .area-direita {
-        flex: 5; 
+        flex: 5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         background-color: var(--cor-fundo);
     }
 

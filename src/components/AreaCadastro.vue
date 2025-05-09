@@ -69,7 +69,7 @@ function enviarFormulario() {
         flex-direction: column;
         margin: 20px 0px;
         padding: 12px;
-        border-radius: 35px;
+        border-radius: 30px;
         font-size: 1rem;
         color: var(--cor-azul-escuro);
     }

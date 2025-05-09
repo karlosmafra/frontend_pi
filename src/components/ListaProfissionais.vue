@@ -1,7 +1,8 @@
 <script setup>
     import CardProfissional from '@/components/CardProfissional.vue';
+    import Avatar from '@/assets/img/avatar_placeholder.png';
 
-    const profissionais = [{nome: "João Cardoso", funcao: "Corretor Imobiliário"}, {nome: "Fernanda Pereira", funcao: "Arquiteta"}, {nome: "Juliana Maria", funcao: "Engenheira"}, {nome: "Sandro Alves", funcao: "Pedreiro"}]
+    const profissionais = [{nome: "João Cardoso", funcao: "Corretor Imobiliário", imagem: Avatar}, {nome: "Fernanda Pereira", funcao: "Arquiteta", imagem: Avatar}, {nome: "Juliana Maria", funcao: "Engenheira", imagem: Avatar}, {nome: "Sandro Alves", funcao: "Pedreiro", imagem: Avatar}]
 </script>
 
 
