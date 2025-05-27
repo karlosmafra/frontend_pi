@@ -1,5 +1,6 @@
 <script setup>
-
+import { useRouter } from 'vue-router'
+const router = useRouter()
 import { ref } from 'vue';
 import BotaoQuadrado from './BotaoQuadrado.vue';
 
@@ -10,12 +11,40 @@ const email = ref('');
 const senha = ref('');
 
 // Função para tratar o envio do formulário
-function enviarFormulario() {
-  console.log('Nome:', nome.value);
-  console.log('Telefone:', telefone.value);
-  console.log('Email:', email.value);
-  console.log('Senha:', senha.value);
-  alert('Formulário enviado');
+async function enviarFormulario(tipo) {
+
+   const dados = {
+    nome: nome.value,
+    telefone: telefone.value,
+    email: email.value,
+    senha: senha.value,
+    tipo: tipo,
+  }
+
+  try {
+    const resposta = await fetch('http://localhost:3000/usuario', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(dados)
+    });
+
+    const resultado = await resposta.json()
+
+    if (resposta.ok) {
+      alert('Cadastro realizado com sucesso!')
+      console.log(resultado)
+      router.push('/home')
+    } else {
+      alert(`Erro: ${resultado.mensagem || 'Não foi possível cadastrar.'}`)
+    }
+
+  } catch (erro) {
+    console.error('Erro na requisição:', erro)
+    alert('Erro ao conectar com o servidor.')
+  }
+
 }
 
 </script>
@@ -35,8 +64,8 @@ function enviarFormulario() {
 
             <h2>Selecione:</h2>
             <div id="div-enviar">
-                <BotaoQuadrado type="submit" :texto="'Cliente'" :cor="'var(--cor-laranja)'" />
-                <BotaoQuadrado type="submit" :texto="'Prestador de Serviço'" :cor="'var(--cor-laranja)'" />
+                <BotaoQuadrado type="button" :texto="'Cliente'" :cor="'var(--cor-laranja)'" @click="enviarFormulario('cliente')" />
+                <BotaoQuadrado type="button" :texto="'Prestador de Serviço'" :cor="'var(--cor-laranja)'" @click="enviarFormulario('prestador')" />
             </div>
 
             <RouterLink to="/">Já tenho uma conta</RouterLink>
