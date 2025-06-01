@@ -5,45 +5,13 @@ import { ref } from 'vue';
 import BotaoQuadrado from './BotaoQuadrado.vue';
 
 // Campos do formulário
-const nome = ref('');
-const telefone = ref('');
 const email = ref('');
 const senha = ref('');
 
 // Função para tratar o envio do formulário
-async function enviarFormulario(role_id) {
+async function enviarFormulario() {
 
-   const dados = {
-    nome: nome.value,
-    telefone: telefone.value,
-    email: email.value,
-    senha: senha.value,
-    role_id: role_id,
-  }
-
-  try {
-    const resposta = await fetch('http://localhost:3000/usuario', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(dados)
-    });
-
-    const resultado = await resposta.json()
-
-    if (resposta.ok) {
-      alert('Cadastro realizado com sucesso!')
-      console.log(resultado)
-      router.push('/home')
-    } else {
-      alert(`Erro: ${resultado.mensagem || 'Não foi possível cadastrar.'}`)
-    }
-
-  } catch (erro) {
-    console.error('Erro na requisição:', erro)
-    alert('Erro ao conectar com o servidor.')
-  }
+  alert("Criar função de login")
 
 }
 
@@ -55,20 +23,16 @@ async function enviarFormulario(role_id) {
 
         <form @submit.prevent="enviarFormulario" id="formulario">
 
-            <h1>Faça seu cadastro:</h1>
+            <h1>Insira seu login:</h1>
 
-            <input type="text" id="nome" placeholder="Nome" v-model="nome" required />
-            <input type="text" id="telefone" placeholder="Telefone" v-model="telefone" required />
             <input type="email" id="email" placeholder="E-mail" v-model="email" required />
             <input type="password" id="senha" placeholder="Senha" v-model="senha" required />
 
-            <h2>Selecione:</h2>
             <div id="div-enviar">
-                <BotaoQuadrado type="button" :texto="'Cliente'" :cor="'var(--cor-laranja)'" @click="enviarFormulario('cliente')" />
-                <BotaoQuadrado type="button" :texto="'Prestador de Serviço'" :cor="'var(--cor-laranja)'" @click="enviarFormulario('prestador')" />
+                <BotaoQuadrado type="button" :texto="'Login'" :cor="'var(--cor-laranja)'" @click="enviarFormulario()" />
             </div>
 
-            <RouterLink to="/">Já tenho uma conta</RouterLink>
+            <RouterLink to="/cadastro">Ainda não possuo uma conta</RouterLink>
 
         </form>
     </div>
@@ -105,7 +69,7 @@ async function enviarFormulario(role_id) {
 
     #div-enviar {
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
     }
 

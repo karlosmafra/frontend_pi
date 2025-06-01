@@ -2,7 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import ServicosView from '@/views/ServicosView.vue'
 import CadastroView from '@/views/CadastroView.vue'
-import ProfissionalView from '@/views/ProfissionalView.vue'
+import LoginView from '@/views/LoginView.vue'
+import PerfilProfissionalView from '@/views/PerfilProfissionalView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -18,19 +19,19 @@ const router = createRouter({
       component: ServicosView,
     },
     {
-      path: '/',
+      path: '/cadastro',
       name: 'cadastro',
       component: CadastroView,
     },
     {
-      path: '/login',
+      path: '/',
       name: 'login',
-      component: CadastroView,
+      component: LoginView,
     },
     {
       path: '/profissional',
       name: 'profissional',
-      component: ProfissionalView,
+      component: PerfilProfissionalView,
     }
   ],
 })

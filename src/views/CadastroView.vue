@@ -1,6 +1,4 @@
 <script setup>
-import BarraNav from '@/components/BarraNav.vue';
-import BotaoQuadrado from '@/components/BotaoQuadrado.vue';
 import AreaCadastro from '@/components/AreaCadastro.vue';
 </script>
 

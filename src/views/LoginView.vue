@@ -1,20 +1,15 @@
 <script setup>
-  import BarraNav from '@/components/BarraNav.vue';
-  import BotaoQuadrado from '@/components/BotaoQuadrado.vue';
-
+import AreaLogin from '@/components/AreaLogin.vue';
 </script>
 
 <template>
 
-    <BarraNav/>
-
     <div class="container">
-        
-        <div class="area-esquerda">
-            
-        </div>
+        <AreaLogin class="area-esquerda">
+
+        </AreaLogin>
         <div class="area-direita">
-            
+            <img src="../assets/img/logo_azul_4.png" alt="logo_skill_match">
         </div>
     </div>
 
@@ -32,12 +27,14 @@
     }
 
     .area-esquerda {
-        flex: 1;
-        background-color: var(--cor-azul);
+        flex: 4; 
     }
 
     .area-direita {
-        flex: 3; 
+        flex: 5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         background-color: var(--cor-fundo);
     }
 
