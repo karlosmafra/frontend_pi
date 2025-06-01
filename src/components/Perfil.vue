@@ -116,54 +116,71 @@ function excluirConta() {
         <input v-model="user.email" placeholder="E-mail">
         <button class="save-btn" @click="saveProfile">SALVAR</button>
       </div>
-
+      
       <div class="main">
-        <h2>Complete seu perfil profissional</h2>
 
-        <button class="excluir-btn" @click="excluirConta">EXCLUIR CONTA</button>
-
-        <div class="section">
-          <label>Sobre Mim</label>
-          <textarea v-model="user.about" rows="4"></textarea>
+        <div class="title">
+          <h2>Complete seu perfil profissional</h2>
+          <button class="excluir-btn" @click="excluirConta">EXCLUIR CONTA</button>
         </div>
 
-        <div class="section">
-          <label>Habilidades</label>
-          <input v-model="newSkill" @keyup.enter="addSkill">
-          <button class="add-btn" @click="addSkill">+</button>
-          <div class="list">
-            <div class="list-item" v-for="(skill, index) in user.skills" :key="index">
-              {{ skill }} <button @click="removeSkill(index)">🗑</button>
-            </div>
-          </div>
-        </div>
+        <hr>
 
-        <div class="section">
-          <label>Experiência Profissional</label>
-          <div class="field-row">
-            <input v-model="newExperience.local" placeholder="Local">
-            <input v-model="newExperience.funcao" placeholder="Atuação">
-          </div>
-          <button class="add-btn" @click="addExperience">Adicionar mais</button>
-          <div class="list">
-            <div class="list-item" v-for="(exp, index) in user.experiences" :key="index">
-              {{ exp.local }} – {{ exp.funcao }} <button @click="removeExperience(index)">🗑</button>
-            </div>
-          </div>
-        </div>
+        <div class="container-sections">
+          <div class="container-e">
 
-        <div class="section">
-          <label>Formação Acadêmica</label>
-          <div class="field-row">
-            <input v-model="newEducation.instituicao" placeholder="Instituição">
-            <input v-model="newEducation.curso" placeholder="Curso">
-          </div>
-          <button class="add-btn" @click="addEducation">Adicionar mais</button>
-          <div class="list">
-            <div class="list-item" v-for="(edu, index) in user.education" :key="index">
-              {{ edu.instituicao }} – {{ edu.curso }} <button @click="removeEducation(index)">🗑</button>
+            <div class="section">
+              <label>Sobre Mim</label>
+              <textarea v-model="user.about" rows="4"></textarea>
             </div>
+
+            <div class="section">
+              <label>Experiência Profissional</label>
+              <div class="field-row">
+                <input v-model="newExperience.local" placeholder="Local">
+                <input v-model="newExperience.funcao" placeholder="Atuação">
+              </div>
+              <button class="add-btn" @click="addExperience">Adicionar</button>
+              <div class="list">
+                <div class="list-item" v-for="(exp, index) in user.experiences" :key="index">
+                  {{ exp.local }} – {{ exp.funcao }} <button @click="removeExperience(index)">🗑</button>
+                </div>
+              </div>
+            </div>
+
           </div>
+
+          <div class="container-d">
+
+            <div class="section">
+              <label>Habilidades</label>
+              <div class="div-skill">
+              <input v-model="newSkill" @keyup.enter="addSkill">
+              <button class="add-btn" @click="addSkill">+</button>
+              </div>
+              <div class="list">
+                <div class="list-item" v-for="(skill, index) in user.skills" :key="index">
+                  {{ skill }} <button @click="removeSkill(index)">🗑</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="section">
+              <label>Formação Acadêmica</label>
+              <div class="field-row">
+                <input v-model="newEducation.instituicao" placeholder="Instituição">
+                <input v-model="newEducation.curso" placeholder="Curso">
+              </div>
+              <button class="add-btn" @click="addEducation">Adicionar</button>
+              <div class="list">
+                <div class="list-item" v-for="(edu, index) in user.education" :key="index">
+                  {{ edu.instituicao }} – {{ edu.curso }} <button @click="removeEducation(index)">🗑</button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
         </div>
 
       </div>
@@ -182,37 +199,41 @@ function excluirConta() {
       background-color: #fff8ee;
     }
 
-    .top-bar {
-      background-color: #007a99;
-      padding: 15px 30px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      color: white;
-    }
-
-    .top-bar h1 {
-      margin: 0;
-      font-size: 24px;
+    hr {
+      height: 4px;
+      background-color: var(--cor-laranja);
+      border: none;
     }
 
     .container {
       display: flex;
     }
 
+    .container-sections {
+      display: flex;
+      padding: 10px;
+    }
+
+    .container-e, .container-d {
+      padding: 10px 80px;
+      flex: 1;
+    }
+
     .sidebar {
-      width: 280px;
-      background-color: #007a99;
+      height: 86.8vh;
+      width: 20%;
+      background-color: var(--cor-azul);
       padding: 20px;
       color: white;
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: space-between;
     }
 
     .profile-pic {
-      width: 230px;
-      height: 230px;
+      width: 260px;
+      height: 260px;
       background-color: #ff7a32;
       display: flex;
       justify-content: center;
@@ -222,7 +243,7 @@ function excluirConta() {
       color: white;
       margin-bottom: 15px;
       position: relative;
-      border-radius: 4px;
+      border: 4px solid white;
       overflow: hidden;
       cursor: pointer;
     }
@@ -232,43 +253,68 @@ function excluirConta() {
     }
 
     .sidebar input {
-      margin-bottom: 10px;
+      background-color: transparent;
+      color: white;
+      margin-bottom: 15px;
       padding: 8px;
       border: none;
-      border-radius: 4px;
+      border-bottom: 2px solid white;
       width: 100%;
     }
 
     .main {
       flex: 1;
-      padding: 30px;
     }
 
     h2 {
       color: #f47920;
       margin-top: 0;
+      font-size: 1.8rem;
+    }
+
+    .title {
+      display: flex;
+      justify-content: space-between;
+      padding: 30px 50px 30px 67px;
     }
 
     label {
       font-weight: bold;
+      font-size: 1.7rem;
       color: #f47920;
       display: block;
-      margin-top: 10px;
+      margin: 20px 0px;
     }
 
     input, textarea {
       width: 100%;
       padding: 10px;
-      margin-top: 5px;
+      margin-top: 10px;
       margin-bottom: 15px;
       border: 1px solid #ccc;
-      border-radius: 4px;
       font-size: 16px;
     }
 
-    .field-row {
+    .main input, textarea {
+      background-color: transparent;
+      color: var(--cor-azul-escuro);
+      border: 1px solid var(--cor-azul-escuro);
+      margin-bottom: 25px;
+      height: 50px;
+    }
+
+    .div-skill {
       display: flex;
-      gap: 10px;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    textarea {
+      height: 180px;
+    }
+
+    .field-row {
+      gap: 20px;
     }
 
     .field-row input {
@@ -282,11 +328,12 @@ function excluirConta() {
     .list-item {
       display: flex;
       justify-content: space-between;
-      background-color: white;
-      border: 1px solid #007a99;
-      padding: 8px;
-      border-radius: 4px;
-      margin-bottom: 5px;
+      align-items: center;
+      background-color: transparent;
+      color: var(--cor-azul-escuro);
+      border: 1px solid var(--cor-azul-escuro);
+      padding-left: 10px;
+      margin: 10px 0px;
     }
 
     .list-item button {
@@ -298,18 +345,20 @@ function excluirConta() {
     }
 
     button {
-      background-color: #f47920;
+      background-color: var(--cor-laranja);
       color: white;
       border: none;
       padding: 10px 15px;
       font-size: 16px;
       cursor: pointer;
-      border-radius: 4px;
+    }
+
+    .main button {
+      background-color: var(--cor-azul-escuro);
     }
 
     .add-btn {
-      margin-top: -10px;
-      margin-bottom: 20px;
+      margin-top: -20px;
     }
 
     .save-btn {
@@ -319,8 +368,5 @@ function excluirConta() {
 
     .excluir-btn {
       background-color: #004f61;
-      float: right;
-      margin-top: -60px;
-      margin-bottom: 20px;
     }
 </style>

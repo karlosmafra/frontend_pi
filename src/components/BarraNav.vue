@@ -40,8 +40,12 @@
         text-decoration: none;
     }
 
+    a:hover {
+        text-decoration: underline;
+    }
+
     hr {
-        height: 2px;
+        height: 4px;
         background-color: var(--cor-laranja);
         border: none;
     }

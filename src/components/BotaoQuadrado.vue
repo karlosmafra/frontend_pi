@@ -23,6 +23,11 @@ const props = defineProps({
         padding: 5px;
         color: #ffffff;
         background-color: v-bind(cor);
+        text-decoration: none;
+    }
+
+    button:hover {
+        text-decoration: underline 2px;
     }
 
 </style>
