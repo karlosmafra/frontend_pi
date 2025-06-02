@@ -11,8 +11,21 @@ const senha = ref('');
 // Função para tratar o envio do formulário
 async function enviarFormulario() {
 
-  alert("Criar função de login")
+  //alert("Criar função de login")
+  logarLocalmente()
 
+}
+
+function logarLocalmente() {
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    if (user && user.email === email.value && user.senha === senha.value) {
+        localStorage.setItem('loggedInUser', JSON.stringify(user));
+        alert('Login bem-sucedido!');
+        router.push('/home');
+    } else {
+        alert('E-mail ou senha incorretos!');
+    }
 }
 
 </script>

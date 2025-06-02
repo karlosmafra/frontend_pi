@@ -7,12 +7,13 @@
     
     <nav>
          <div class="container" id="container-img">
-           <img :src="Logo" alt="Logo">
+           <img :src="Logo" alt="Logo" height="70px">
          </div>
         <div class="container" id="container-links">
-            <RouterLink to="/">Home</RouterLink>
+            <RouterLink to="/home">Home</RouterLink>
             <RouterLink to="/servicos">Serviços</RouterLink>
             <RouterLink to="/">Contato</RouterLink>
+            <RouterLink to="/profissional" style="margin: 0px;"><img src="../assets/img/avatar.png" alt="Ícone de perfil" height="60px"></RouterLink>
         </div>
     </nav>
     <hr>

@@ -13,6 +13,9 @@ const senha = ref('');
 // Função para tratar o envio do formulário
 async function enviarFormulario(role_id) {
 
+  salvarLocalmente(role_id)
+
+  /*
    const dados = {
     nome: nome.value,
     telefone: telefone.value,
@@ -44,6 +47,29 @@ async function enviarFormulario(role_id) {
     console.error('Erro na requisição:', erro)
     alert('Erro ao conectar com o servidor.')
   }
+  */
+
+}
+
+function salvarLocalmente(tipo) {
+
+  if (!nome.value || !telefone.value || !email.value || !senha.value) {
+    alert("Preencha todos os campos.");
+    return;
+  }
+
+  // Cria objeto user e salva no localStorage
+  const user = {
+    nome: nome.value,
+    telefone: telefone.value,
+    email: email.value,
+    senha: senha.value,
+    tipo: tipo
+  };
+
+  localStorage.setItem('user', JSON.stringify(user));
+  alert('Cadastro realizado com sucesso!');
+  router.push('/');
 
 }
 

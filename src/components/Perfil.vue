@@ -220,7 +220,7 @@ function excluirConta() {
     }
 
     .sidebar {
-      height: 86.8vh;
+      height: 87.5vh;
       width: 20%;
       background-color: var(--cor-azul);
       padding: 20px;
