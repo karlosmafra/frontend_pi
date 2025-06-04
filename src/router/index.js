@@ -4,6 +4,7 @@ import ServicosView from '@/views/ServicosView.vue'
 import CadastroView from '@/views/CadastroView.vue'
 import LoginView from '@/views/LoginView.vue'
 import PerfilProfissionalView from '@/views/PerfilProfissionalView.vue'
+import PaginaProfissionalView from '@/views/PaginaProfissionalView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -29,9 +30,14 @@ const router = createRouter({
       component: LoginView,
     },
     {
+      path: '/perfil',
+      name: 'perfil',
+      component: PerfilProfissionalView,
+    },
+    {
       path: '/profissional',
       name: 'profissional',
-      component: PerfilProfissionalView,
+      component: PaginaProfissionalView,
     }
   ],
 })

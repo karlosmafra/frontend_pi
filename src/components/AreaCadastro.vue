@@ -69,7 +69,7 @@ function salvarLocalmente(tipo) {
 
   localStorage.setItem('user', JSON.stringify(user));
   alert('Cadastro realizado com sucesso!');
-  router.push('/');
+  router.push('/home');
 
 }
 

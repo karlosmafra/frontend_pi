@@ -1,83 +1,120 @@
 <script setup>
-import { RouterLink } from 'vue-router';
-import BotaoQuadrado from './BotaoQuadrado.vue';
+import { RouterLink } from 'vue-router'
+import BotaoQuadrado from './BotaoQuadrado.vue'
 
 defineProps({
   prof: Object
-});
+})
 
+function getInicial(nome) {
+  return nome ? nome.charAt(0).toUpperCase() : '?'
+}
 </script>
 
 <template>
-
   <div class="card">
-    <div class="nome-foto">
-      <div class="nome">
-        <h2 id="card-nome">{{ prof.nome }}</h2>
-        <h3 id="card-funcao">{{ prof.funcao }}</h3>
+    <div class="topo">
+      <div class="dados">
+        <h2 class="nome">{{ prof.nome }}</h2>
+        <h3 class="funcao">{{ prof.funcao }}</h3>
       </div>
-      <div class="foto">
-        <img v-if="prof.imagem" :src="prof.imagem" alt="Foto do profissional" id="card-img">
+      <div class="avatar">
+        <img v-if="prof.imagem" :src="prof.imagem" alt="Foto do profissional" class="foto" />
+        <div v-else class="inicial">{{ getInicial(prof.nome) }}</div>
       </div>
     </div>
-    <div class="reviews-links">
-        <p>clientes satisfeitos</p>
-        <BotaoQuadrado class="btn-contato" :texto="'ENTRAR EM CONTATO'" :cor="'var(--cor-azul-escuro)'"/> <br>
-        <RouterLink to="/profissional">Mais informações</RouterLink>
-    </div>
-  </div>
 
+    <div class="estrelas">
+      <span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span>
+    </div>
+
+    <p class="clientes">+de {{ prof.clientes }} clientes satisfeitos</p>
+
+    <RouterLink to="/profissional">
+      <BotaoQuadrado class="btn-contato" :texto="'ENTRAR EM CONTATO'" :cor="'var(--cor-azul-escuro)'" />
+    </RouterLink> <br>
+
+    <RouterLink to="/profissional" class="mais-info">Mais informações</RouterLink>
+  </div>
 </template>
 
 <style scoped>
-
 .card {
-  width: 100%;
-  max-width: 350px;
+  width: 350px;
   background: var(--cor-azul);
   color: white;
   padding: 24px;
-  text-align: center;
+  text-align: left;
+  border-radius: 4px;
 }
 
-.nome-foto {
-    display: flex;
-    justify-content: space-between;
-    text-align: left;
+.topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+  margin-bottom: 16px;
 }
 
-.reviews-links {
-    text-align: left;
+.dados {
+  flex: 1;
 }
 
-#card-img {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-}
-
-#card-nome {
+.nome {
   font-size: 1.3rem;
+  margin: 0;
 }
 
-#card-funcao {
-  font-size: 1.1rem;
-  margin-bottom: 10px;
+.funcao {
+  font-size: 1rem;
+  margin: 4px 0 0;
 }
 
-.reviews-links p {
-    font-size: 0.9rem;
+.avatar {
+  width: 60px;
+  height: 60px;
+  margin-left: 12px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: #f98e45;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+
+.foto {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid white;
+}
+
+.inicial {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+}
+
+.estrelas {
+  margin: 12px 0;
+  font-size: 1.2rem;
+  color: orange;
+}
+
+.clientes {
+  font-size: 0.9rem;
+  margin-bottom: 12px;
 }
 
 .btn-contato {
-    aspect-ratio: 7 / 1;
-    width: 75%;
-    margin: 5px 0px;
+  width: 80%;
+  margin: 8px 0;
 }
 
-.reviews-links a {
-    color: white;
-    font-size: 0.8rem;
+.mais-info {
+  color: white;
+  font-size: 0.8rem;
+  text-decoration: underline;
 }
-
 </style>

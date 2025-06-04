@@ -13,7 +13,7 @@
             <RouterLink to="/home">Home</RouterLink>
             <RouterLink to="/servicos">Serviços</RouterLink>
             <RouterLink to="/">Contato</RouterLink>
-            <RouterLink to="/profissional" style="margin: 0px;"><img src="../assets/img/avatar.png" alt="Ícone de perfil" height="60px"></RouterLink>
+            <RouterLink to="/perfil" style="margin: 0px;"><img src="../assets/img/avatar.png" alt="Ícone de perfil" height="60px"></RouterLink>
         </div>
     </nav>
     <hr>

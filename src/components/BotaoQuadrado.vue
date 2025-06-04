@@ -24,6 +24,7 @@ const props = defineProps({
         color: #ffffff;
         background-color: v-bind(cor);
         text-decoration: none;
+        cursor: pointer;
     }
 
     button:hover {
