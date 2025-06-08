@@ -25,7 +25,9 @@ function getInicial(nome) {
     </div>
 
     <div class="estrelas">
-      <span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span>
+      <span v-for="i in 5" :key="i">
+        {{ i <= prof.nota ? '★' : '☆' }}
+      </span>
     </div>
 
     <p class="clientes">+de {{ prof.clientes }} clientes satisfeitos</p>
@@ -71,8 +73,8 @@ function getInicial(nome) {
 }
 
 .avatar {
-  width: 60px;
-  height: 60px;
+  width: 70px;
+  height: 70px;
   margin-left: 12px;
   border-radius: 50%;
   overflow: hidden;
@@ -97,9 +99,9 @@ function getInicial(nome) {
 }
 
 .estrelas {
-  margin: 12px 0;
-  font-size: 1.2rem;
-  color: orange;
+  margin-bottom: 12px;
+  font-size: 2rem;
+  color: var(--cor-laranja);
 }
 
 .clientes {
@@ -109,7 +111,9 @@ function getInicial(nome) {
 
 .btn-contato {
   width: 80%;
+  height: 40px;
   margin: 8px 0;
+  font-size: 1rem;
 }
 
 .mais-info {

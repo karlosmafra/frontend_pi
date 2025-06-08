@@ -1,8 +1,10 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import BarraNav from './BarraNav.vue'
-import Review from './Review.vue'
 import BotaoQuadrado from './BotaoQuadrado.vue'
+
+const nota = ref(0)
+const hover = ref(0)
 
 const user = ref({
   name: '',
@@ -76,15 +78,29 @@ onMounted(() => {
         <div class="body">
           
           <textarea name="area_review" id="area_review"></textarea>
+
           <div class="bottom">
+
             <div class="div-estrelas">
-              <p>
-                Selecione a quantidade de estrelas:
-              </p>
+              <p>Selecione a quantidade de estrelas:</p>
+              <div class="estrelas">
+                <span
+                  v-for="estrela in 5"
+                  :key="estrela"
+                  @click="nota = estrela"
+                  @mouseover="hover = estrela"
+                  @mouseleave="hover = 0"
+                  class="estrela"
+                >
+                  {{ estrela <= (hover || nota) ? '★' : '☆' }}
+                </span>
+              </div>
             </div>
+
             <div class="div-botao">
-              <BotaoQuadrado :texto="'Salvar'" :cor="'var(--cor-laranja)'"/>
+              <BotaoQuadrado type="button" :texto="'Salvar'" :cor="'var(--cor-laranja)'" />
             </div>
+
           </div>
 
         </div>
@@ -255,6 +271,20 @@ onMounted(() => {
 
     .body p {
       color: var(--cor-azul-escuro);
+    }
+
+    .estrelas {
+      font-size: 2rem;
+      color: var(--cor-laranja);
+      cursor: pointer;
+    }
+
+    .estrela {
+      transition: transform 0.2s;
+    }
+
+    .estrela:hover {
+      transform: scale(1.1);
     }
 
 </style>
