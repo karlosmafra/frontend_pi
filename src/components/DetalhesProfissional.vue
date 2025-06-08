@@ -1,5 +1,6 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
+import { RouterLink } from 'vue-router'
 import BarraNav from './BarraNav.vue'
 
 const user = ref({
@@ -78,7 +79,7 @@ onMounted(() => {
 
         <div class="title">
           <h2>Perfil profissional</h2>
-          <button class="excluir-btn" @click="">EXCLUIR CONTA</button>
+          <RouterLink to="/review"> <button class="excluir-btn">AVALIAR</button> </RouterLink>
         </div>
 
         <hr>
@@ -155,6 +156,13 @@ onMounted(() => {
 
           </div>
 
+        </div>
+
+        <div class="div-ver-avaliacoes">
+          <div class="estrelas">
+            <span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span>
+          </div>
+          <RouterLink to="/reviews">Ver Avaliações</RouterLink>
         </div>
 
       </div>
@@ -338,6 +346,23 @@ onMounted(() => {
       border: none;
       border-bottom: 2px solid white;
       width: 100%;
+    }
+
+    .div-ver-avaliacoes {
+      display: flex;
+      flex-direction: column;
+      align-items: end;
+      justify-content: end;
+      margin: 30px 60px;
+    }
+
+    .div-ver-avaliacoes a{
+      color: var(--cor-laranja);
+      font-size: 1.4rem;
+    }
+
+    .estrelas span{
+      font-size: 1.4rem;
     }
 
 </style>

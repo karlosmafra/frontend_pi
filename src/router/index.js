@@ -5,6 +5,9 @@ import CadastroView from '@/views/CadastroView.vue'
 import LoginView from '@/views/LoginView.vue'
 import PerfilProfissionalView from '@/views/PerfilProfissionalView.vue'
 import PaginaProfissionalView from '@/views/PaginaProfissionalView.vue'
+import PaginaProfissionalReviews from '@/views/PaginaProfissionalReviews.vue'
+import PaginaProfissionalEscreverReview from '@/views/PaginaProfissionalEscreverReview.vue'
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -38,6 +41,16 @@ const router = createRouter({
       path: '/profissional',
       name: 'profissional',
       component: PaginaProfissionalView,
+    },
+    {
+      path: '/reviews',
+      name: 'reviews',
+      component: PaginaProfissionalReviews,
+    },
+    {
+      path: '/review',
+      name: 'review',
+      component: PaginaProfissionalEscreverReview,
     }
   ],
 })
