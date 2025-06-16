@@ -46,10 +46,19 @@ function uploadImage(event) {
 }
 
 function addSkill() {
-  if (newSkill.value.trim()) {
-    user.value.skills.push(newSkill.value.trim())
-    newSkill.value = ''
+  const skill = newSkill.value.trim()
+
+  if (!skill) {
+    alert('Por favor, insira uma habilidade válida.')
+    return
   }
+  if (skill.length > 50) {
+    alert('Cada habilidade deve ter no máximo 50 caracteres.');
+    return;
+  }
+
+  user.value.skills.push(skill)
+  newSkill.value = ''
 }
 
 function removeSkill(index) {
@@ -58,11 +67,19 @@ function removeSkill(index) {
 
 function addExperience() {
   const { local, funcao } = newExperience.value
-  if (local && funcao) {
-    user.value.experiences.push({ ...newExperience.value })
-    newExperience.value.local = ''
-    newExperience.value.funcao = ''
+
+  if (!local.trim() || !funcao.trim()) {
+    alert('Por favor, preencha todos os campos da experiência profissional.')
+    return
   }
+  if (local.length > 50 || funcao.length > 50) {
+    alert('Cada campo da experiência deve ter no máximo 50 caracteres.');
+    return;
+  }
+
+  user.value.experiences.push({ ...newExperience.value })
+  newExperience.value.local = ''
+  newExperience.value.funcao = ''
 }
 
 function removeExperience(index) {
@@ -71,11 +88,19 @@ function removeExperience(index) {
 
 function addEducation() {
   const { instituicao, curso } = newEducation.value
-  if (instituicao && curso) {
-    user.value.education.push({ ...newEducation.value })
-    newEducation.value.instituicao = ''
-    newEducation.value.curso = ''
+
+  if (!instituicao.trim() || !curso.trim()) {
+    alert('Por favor, preencha todos os campos da formação acadêmica.')
+    return
   }
+  if (instituicao.length > 50 || curso.length > 50) {
+    alert('Cada campo da formação deve ter no máximo 50 caracteres.');
+    return;
+  }
+
+  user.value.education.push({ ...newEducation.value })
+  newEducation.value.instituicao = ''
+  newEducation.value.curso = ''
 }
 
 function removeEducation(index) {
@@ -83,8 +108,33 @@ function removeEducation(index) {
 }
 
 function saveProfile() {
+
+  const camposObrigatorios = [
+    { campo: user.value.name, nome: 'Nome' },
+    { campo: user.value.role, nome: 'Profissão' },
+    { campo: user.value.phone, nome: 'Telefone' },
+    { campo: user.value.email, nome: 'E-mail' }
+  ];
+
+  for (const campo of camposObrigatorios) {
+    if (!campo.campo.trim()) {
+      alert(`Por favor, preencha o campo ${campo.nome}.`);
+      return;
+    }
+    if (campo.campo.trim().length > 50) {
+      alert(`O campo ${campo.nome} deve ter no máximo 50 caracteres.`);
+      return;
+    }
+  }
+
+  if (user.value.about.length > 500) {
+    alert('O campo "Sobre Mim" deve ter no máximo 500 caracteres.');
+    return;
+  }
+
   localStorage.setItem('perfil', JSON.stringify(user.value))
   alert('Perfil salvo com sucesso!')
+
 }
 
 function excluirConta() {

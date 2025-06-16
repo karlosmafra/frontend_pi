@@ -2,7 +2,9 @@
 import { ref, computed, onMounted } from 'vue'
 import BarraNav from './BarraNav.vue'
 import BotaoQuadrado from './BotaoQuadrado.vue'
+import router from '@/router'
 
+const review = ref('');
 const nota = ref(0)
 const hover = ref(0)
 
@@ -34,6 +36,23 @@ onMounted(() => {
   }
 })
 
+function enviarReview() {
+
+  if (review.value.length > 1000) {
+    alert('A avaliação deve ter no máximo 1000 caracteres.');
+    return;
+  }
+
+  if (nota.value === 0) {
+    alert('Por favor, selecione uma quantidade de estrelas.');
+    return;
+  }
+
+  alert('Avaliação enviada!')
+  router.push('/reviews')
+
+}
+
 </script>
 
 
@@ -51,16 +70,16 @@ onMounted(() => {
         </label>
 
         <div class="sidebar-info">
-          <p>Nome</p>
+          <p>Juliana Maria</p>
         </div>
         <div class="sidebar-info">
-          <p>Profissão</p>
+          <p>Engenheira</p>
         </div>
         <div class="sidebar-info">
-          <p>Telefone</p>
+          <p>61999999999</p>
         </div>
         <div class="sidebar-info">
-          <p>E-mail</p>
+          <p>juliana.maria@email.com</p>
         </div>
         <button class="save-btn" @click="">ENVIAR MENSAGEM</button>
 
@@ -77,7 +96,7 @@ onMounted(() => {
 
         <div class="body">
           
-          <textarea name="area_review" id="area_review"></textarea>
+          <textarea v-model="review" name="area_review" id="area_review"></textarea>
 
           <div class="bottom">
 
@@ -98,7 +117,7 @@ onMounted(() => {
             </div>
 
             <div class="div-botao">
-              <BotaoQuadrado type="button" :texto="'Salvar'" :cor="'var(--cor-laranja)'" />
+              <button type="button" @click="enviarReview">Enviar</button>
             </div>
 
           </div>

@@ -54,7 +54,20 @@ async function enviarFormulario(role_id) {
 function salvarLocalmente(tipo) {
 
   if (!nome.value || !telefone.value || !email.value || !senha.value) {
-    alert("Preencha todos os campos.");
+    alert("Preencha todos os campos.")
+    return
+  }
+
+  const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)
+  const telefoneValido = /^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$/.test(telefone.value)
+
+  if (!emailValido) {
+    alert("Digite um e-mail válido.");
+    return;
+  }
+
+  if (!telefoneValido) {
+    alert("Digite um telefone válido.");
     return;
   }
 
@@ -67,9 +80,9 @@ function salvarLocalmente(tipo) {
     tipo: tipo
   };
 
-  localStorage.setItem('user', JSON.stringify(user));
-  alert('Cadastro realizado com sucesso!');
-  router.push('/home');
+  localStorage.setItem('user', JSON.stringify(user))
+  alert('Cadastro realizado com sucesso!')
+  router.push('/home')
 
 }
 

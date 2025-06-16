@@ -12,7 +12,7 @@ const props = defineProps({
 
     <div class="review">
         <div class="estrelas">
-         <span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span>
+         ★★★★★
         </div>
         <h1>{{ props.nome }}</h1>
         <p>{{ props.texto }}</p>
@@ -33,6 +33,11 @@ const props = defineProps({
         font-weight: normal;
         color: var(--cor-azul-escuro);
         margin: 5px 0px;
+    }
+
+    .estrelas {
+      font-size: 2rem;
+      color: var(--cor-laranja);
     }
 
 </style>

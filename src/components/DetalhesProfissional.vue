@@ -52,16 +52,16 @@ onMounted(() => {
         </label>
 
         <div class="sidebar-info">
-          <p>Nome</p>
+          <p>Juliana Maria</p>
         </div>
         <div class="sidebar-info">
-          <p>Profissão</p>
+          <p>Engenheira</p>
         </div>
         <div class="sidebar-info">
-          <p>Telefone</p>
+          <p>61999999999</p>
         </div>
         <div class="sidebar-info">
-          <p>E-mail</p>
+          <p>juliana.maria@email.com</p>
         </div>
         <button class="save-btn" @click="">ENVIAR MENSAGEM</button>
 
@@ -90,7 +90,7 @@ onMounted(() => {
             <div class="section">
               <label>Sobre Mim</label>
               <div class="div-sobre">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit iusto asperiores, laborum ad saepe eius. Culpa distinctio velit eaque. Assumenda nihil culpa asperiores repellendus, provident eveniet ex ad minus! Beatae.</p>
+                <p>Sou uma engenheira civil apaixonada por construir soluções inteligentes e sustentáveis. Tenho mais de 8 anos de experiência em gerenciamento de obras, planejamento estrutural e coordenação de equipes multidisciplinares. Acredito que a engenharia é uma ponte entre criatividade e eficiência, e busco aplicar esse princípio em cada projeto.</p>
               </div>
             </div>
 
@@ -98,10 +98,10 @@ onMounted(() => {
               <label>Experiência Profissional</label>
               <div class="field-row">
                 <div class="div-info" id="div-exp-local">
-                  <p>Local</p>
+                  <p>Construtora Vale Azul</p>
                 </div>
                 <div class="div-info" id="div-exp-atuacao">
-                  <p>Atuação</p>
+                  <p>Engenheira de Obras</p>
                 </div>
               </div>
               <!--
@@ -120,9 +120,15 @@ onMounted(() => {
 
             <div class="section">
               <label>Habilidades</label>
-              <div class="div-skill">
-                <div class="div-info" id="div-habilidade">
-                  <p>Habilidade</p>
+              <div class="list">
+                <div class="list-item">
+                  AutoCAD
+                </div>
+                <div class="list-item">
+                  Revit
+                </div>
+                <div class="list-item">
+                  MS Project
                 </div>
               </div>
               <!--
@@ -138,10 +144,10 @@ onMounted(() => {
               <label>Formação Acadêmica</label>
               <div class="field-row">
                 <div class="div-info" id="div-edu-instituicao">
-                  <p>Instituição</p>
+                  <p>Universidade de Brasília</p>
                 </div>
                 <div class="div-info" id="div-edu-curso">
-                  <p>Curso</p>
+                  <p>Bacharelado em Engenharia Civil</p>
                 </div>
               </div>
               <!--
@@ -160,7 +166,7 @@ onMounted(() => {
 
         <div class="div-ver-avaliacoes">
           <div class="estrelas">
-            <span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span>
+            ★★★★★
           </div>
           <RouterLink to="/reviews">Ver Avaliações</RouterLink>
         </div>
@@ -283,7 +289,7 @@ onMounted(() => {
       background-color: transparent;
       color: var(--cor-azul-escuro);
       border: 1px solid var(--cor-azul-escuro);
-      padding-left: 10px;
+      padding: 10px;
       margin: 10px 0px;
     }
 
@@ -361,8 +367,9 @@ onMounted(() => {
       font-size: 1.4rem;
     }
 
-    .estrelas span{
-      font-size: 1.4rem;
+    .estrelas {
+      font-size: 2rem;
+      color: var(--cor-laranja);
     }
 
 </style>

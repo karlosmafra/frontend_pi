@@ -49,16 +49,16 @@ onMounted(() => {
         </label>
 
         <div class="sidebar-info">
-          <p>Nome</p>
+          <p>Juliana Maria</p>
         </div>
         <div class="sidebar-info">
-          <p>Profissão</p>
+          <p>Engenheira</p>
         </div>
         <div class="sidebar-info">
-          <p>Telefone</p>
+          <p>61999999999</p>
         </div>
         <div class="sidebar-info">
-          <p>E-mail</p>
+          <p>juliana.maria@email.com</p>
         </div>
         <button class="save-btn" @click="">ENVIAR MENSAGEM</button>
 
@@ -75,9 +75,9 @@ onMounted(() => {
 
         <div class="div-reviews">
           
-          <Review class="review" :nome="'Carolina Siqueira'" :texto="'Tive um problema sério com a rescisão do meu contrato de trabalho, e o Dr. Vitor me orientou de forma clara e eficiente. Graças a ele, consegui um acordo justo!'"/>
+          <Review class="review" :nome="'Carlos Eduardo'" :texto="'Contratei a Juliana para gerenciar a construção da nossa sede comercial e fiquei impressionado com a organização e liderança dela. Resolveu imprevistos com agilidade e manteve uma comunicação clara durante toda a obra. Excelente profissional!'"/>
 
-          <Review class="review" :nome="'Ricardo Lemos'" :texto="'Atendimento impecável! Sempre disponível para tirar dúvidas e muito transparente em todas as etapas do processo.'"/>
+          <Review class="review" :nome="'Ricardo Lemos'" :texto="'A Juliana foi essencial na reforma da minha casa. Sempre atenciosa, profissional e muito competente. Ela pensou em cada detalhe com cuidado e entregou tudo dentro do prazo. Recomendo de olhos fechados!'"/>
 
         </div>
 

@@ -3,9 +3,9 @@
     import Avatar from '@/assets/img/avatar_placeholder.png';
 
     const profissionais = [{nome: "João Cardoso", funcao: "Corretor Imobiliário", imagem: Avatar, clientes: 30, nota: 5}, 
-    {nome: "Fernanda Pereira", funcao: "Arquiteta", imagem: Avatar, clientes: 60, nota: 4}, 
-    {nome: "Juliana Maria", funcao: "Engenheira", imagem: Avatar, clientes: 40, nota: 5}, 
-    {nome: "Sandro Alves", funcao: "Pedreiro", imagem: Avatar, clientes: 80, nota: 4}]
+    {nome: "Fernanda Pereira", funcao: "Arquiteta", imagem: Avatar, clientes: 60, nota: 4},  
+    {nome: "Sandro Alves", funcao: "Pedreiro", imagem: Avatar, clientes: 80, nota: 4},
+    {nome: "Juliana Maria", funcao: "Engenheira", imagem: Avatar, clientes: 40, nota: 5}]
 </script>
 
 
