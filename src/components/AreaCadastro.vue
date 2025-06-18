@@ -1,32 +1,38 @@
 <script setup>
 import { useRouter } from 'vue-router'
-import { ref } from 'vue';
-import BotaoQuadrado from './BotaoQuadrado.vue';
+import { ref } from 'vue'
+import BotaoQuadrado from './BotaoQuadrado.vue'
 
 // Campos do formulário
-const nome = ref('');
-const telefone = ref('');
-const email = ref('');
-const senha = ref('');
+const nome = ref('')
+const telefone = ref('')
+const email = ref('')
+const senha = ref('')
 
-// Controle de alertas
-const sucesso = ref(false);
-const erro = ref(false);
-const erroMensagem = ref('');
+// Estado de alerta
+const alertMessage = ref('')
+const alertType = ref('') // 'success' ou 'error'
 
-const router = useRouter();
+const router = useRouter()
+
+// Exibe alerta customizado
+function showAlert(msg, type = 'success') {
+  alertMessage.value = msg
+  alertType.value = type
+  setTimeout(() => {
+    alertMessage.value = ''
+  }, 3000)
+}
 
 // Função para tratar o envio do formulário
 async function enviarFormulario(role_id) {
-  salvarLocalmente(role_id);
+  salvarLocalmente(role_id)
 }
 
 function salvarLocalmente(tipo) {
   if (!nome.value || !telefone.value || !email.value || !senha.value) {
-    erro.value = true;
-    sucesso.value = false;
-    erroMensagem.value = "Preencha todos os campos.";
-    return;
+    showAlert('Preencha todos os campos.', 'error')
+    return
   }
 
   const user = {
@@ -35,16 +41,13 @@ function salvarLocalmente(tipo) {
     email: email.value,
     senha: senha.value,
     tipo: tipo
-  };
+  }
 
-  localStorage.setItem('user', JSON.stringify(user));
-
-  sucesso.value = true;
-  erro.value = false;
-
+  localStorage.setItem('user', JSON.stringify(user))
+  showAlert('Cadastro realizado com sucesso.', 'success')
   setTimeout(() => {
-    router.push('/home');
-  }, 1500);
+    router.push('/home')
+  }, 1500)
 }
 </script>
 
@@ -53,20 +56,19 @@ function salvarLocalmente(tipo) {
     <form @submit.prevent="enviarFormulario" id="formulario">
       <h1>Faça seu cadastro:</h1>
 
+      <!-- Alerta customizado -->
+      <div
+        v-if="alertMessage"
+        class="alert-custom"
+        :class="alertType"
+      >
+        {{ alertMessage }}
+      </div>
+
       <input type="text" id="nome" placeholder="Nome" v-model="nome" required />
       <input type="text" id="telefone" placeholder="Telefone" v-model="telefone" required />
       <input type="email" id="email" placeholder="E-mail" v-model="email" required />
       <input type="password" id="senha" placeholder="Senha" v-model="senha" required />
-
-      <!-- Alerta de sucesso -->
-      <b-alert v-if="sucesso" show variant="success">
-        <h4 class="alert-heading">Parabéns!</h4>
-        <hr />
-        <p>Cadastro realizado com sucesso.</p>
-      </b-alert>
-
-      <!-- Alerta de erro -->
-      <b-alert v-if="erro" show variant="danger">{{ erroMensagem }}</b-alert>
 
       <h2>Selecione:</h2>
       <div id="div-enviar">
@@ -85,6 +87,7 @@ function salvarLocalmente(tipo) {
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height: 100vh;
 }
 
 #formulario {
@@ -94,16 +97,36 @@ function salvarLocalmente(tipo) {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  position: relative;
+}
+
+.alert-custom {
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 1rem;
+  text-align: center;
+  font-weight: bold;
+}
+
+.alert-custom.success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.alert-custom.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
 }
 
 input {
-  display: flex;
-  flex-direction: column;
-  margin: 20px 0px;
+  margin: 0;
   padding: 12px;
   border-radius: 30px;
   font-size: 1rem;
   color: var(--cor-azul-escuro);
+  border: none;
 }
 
 #div-enviar {
