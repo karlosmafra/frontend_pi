@@ -1,7 +1,10 @@
 <script setup>
-import { useRouter } from 'vue-router'
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import BotaoQuadrado from './BotaoQuadrado.vue'
+
+// Router
+const router = useRouter()
 
 // Campos do formulário
 const nome = ref('')
@@ -9,13 +12,10 @@ const telefone = ref('')
 const email = ref('')
 const senha = ref('')
 
-// Estado de alerta
+// Alerta
 const alertMessage = ref('')
 const alertType = ref('') // 'success' ou 'error'
 
-const router = useRouter()
-
-// Exibe alerta customizado
 function showAlert(msg, type = 'success') {
   alertMessage.value = msg
   alertType.value = type
@@ -24,7 +24,6 @@ function showAlert(msg, type = 'success') {
   }, 3000)
 }
 
-// Função para tratar o envio do formulário
 async function enviarFormulario(role_id) {
   salvarLocalmente(role_id)
 }
@@ -32,6 +31,19 @@ async function enviarFormulario(role_id) {
 function salvarLocalmente(tipo) {
   if (!nome.value || !telefone.value || !email.value || !senha.value) {
     showAlert('Preencha todos os campos.', 'error')
+    return
+  }
+
+  const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)
+  const telefoneValido = /^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$/.test(telefone.value)
+
+  if (!emailValido) {
+    showAlert('Digite um e-mail válido.', 'error')
+    return
+  }
+
+  if (!telefoneValido) {
+    showAlert('Digite um telefone válido.', 'error')
     return
   }
 
@@ -57,11 +69,7 @@ function salvarLocalmente(tipo) {
       <h1>Faça seu cadastro:</h1>
 
       <!-- Alerta customizado -->
-      <div
-        v-if="alertMessage"
-        class="alert-custom"
-        :class="alertType"
-      >
+      <div v-if="alertMessage" class="alert-custom" :class="alertType">
         {{ alertMessage }}
       </div>
 
