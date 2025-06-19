@@ -14,6 +14,17 @@ const user = ref({
   education: []
 })
 
+const alertMessage = ref('')
+const alertType = ref('') // 'success' | 'error'
+
+function showAlert(msg, type = 'error') {
+  alertMessage.value = msg
+  alertType.value = type
+  setTimeout(() => {
+    alertMessage.value = ''
+  }, 5000)
+}
+
 const newSkill = ref('')
 const newExperience = ref({ local: '', funcao: '' })
 const newEducation = ref({ instituicao: '', curso: '' })
@@ -49,12 +60,12 @@ function addSkill() {
   const skill = newSkill.value.trim()
 
   if (!skill) {
-    alert('Por favor, insira uma habilidade válida.')
+    showAlert('Por favor, insira uma habilidade válida.')
     return
   }
   if (skill.length > 50) {
-    alert('Cada habilidade deve ter no máximo 50 caracteres.');
-    return;
+    showAlert('Cada habilidade deve ter no máximo 50 caracteres.')
+    return
   }
 
   user.value.skills.push(skill)
@@ -69,12 +80,12 @@ function addExperience() {
   const { local, funcao } = newExperience.value
 
   if (!local.trim() || !funcao.trim()) {
-    alert('Por favor, preencha todos os campos da experiência profissional.')
+    showAlert('Por favor, preencha todos os campos da experiência profissional.')
     return
   }
   if (local.length > 50 || funcao.length > 50) {
-    alert('Cada campo da experiência deve ter no máximo 50 caracteres.');
-    return;
+    showAlert('Cada campo da experiência deve ter no máximo 50 caracteres.')
+    return
   }
 
   user.value.experiences.push({ ...newExperience.value })
@@ -90,12 +101,12 @@ function addEducation() {
   const { instituicao, curso } = newEducation.value
 
   if (!instituicao.trim() || !curso.trim()) {
-    alert('Por favor, preencha todos os campos da formação acadêmica.')
+    showAlert('Por favor, preencha todos os campos da formação acadêmica.')
     return
   }
   if (instituicao.length > 50 || curso.length > 50) {
-    alert('Cada campo da formação deve ter no máximo 50 caracteres.');
-    return;
+    showAlert('Cada campo da formação deve ter no máximo 50 caracteres.')
+    return
   }
 
   user.value.education.push({ ...newEducation.value })
@@ -108,137 +119,209 @@ function removeEducation(index) {
 }
 
 function saveProfile() {
-
   const camposObrigatorios = [
     { campo: user.value.name, nome: 'Nome' },
     { campo: user.value.role, nome: 'Profissão' },
     { campo: user.value.phone, nome: 'Telefone' },
     { campo: user.value.email, nome: 'E-mail' }
-  ];
+  ]
 
   for (const campo of camposObrigatorios) {
     if (!campo.campo.trim()) {
-      alert(`Por favor, preencha o campo ${campo.nome}.`);
-      return;
+      showAlert(`Por favor, preencha o campo ${campo.nome}.`)
+      return
     }
     if (campo.campo.trim().length > 50) {
-      alert(`O campo ${campo.nome} deve ter no máximo 50 caracteres.`);
-      return;
+      showAlert(`O campo ${campo.nome} deve ter no máximo 50 caracteres.`)
+      return
     }
   }
 
   if (user.value.about.length > 500) {
-    alert('O campo "Sobre Mim" deve ter no máximo 500 caracteres.');
-    return;
+    showAlert('O campo "Sobre Mim" deve ter no máximo 500 caracteres.')
+    return
   }
 
   localStorage.setItem('perfil', JSON.stringify(user.value))
-  alert('Perfil salvo com sucesso!')
-
+  showAlert('Perfil salvo com sucesso!', 'success')
 }
 
 function excluirConta() {
   if (confirm('Tem certeza que deseja excluir sua conta?')) {
     localStorage.removeItem('perfil')
-    location.reload()
+    showAlert('Conta excluída com sucesso!', 'success')
+    setTimeout(() => location.reload(), 3000)
   }
 }
+
 </script>
 
 
+
 <template>
+  <BarraNav />
 
-    <BarraNav/>
-
-    <div class="container">
-    
-      <div class="sidebar">
-        <label for="upload">
-          <div class="profile-pic" :style="{ backgroundImage: user.image ? 'url(' + user.image + ')' : '', backgroundSize: 'cover' }">
-            <span v-if="!user.image">{{ initials }}</span>
-            <input type="file" id="upload" @change="uploadImage">
-          </div>
-        </label>
-
-        <input v-model="user.name" placeholder="Nome">
-        <input v-model="user.role" placeholder="Profissão">
-        <input v-model="user.phone" placeholder="Telefone">
-        <input v-model="user.email" placeholder="E-mail">
-        <button class="save-btn" @click="saveProfile">SALVAR</button>
-      </div>
-      
-      <div class="main">
-
-        <div class="title">
-          <h2>Complete seu perfil profissional</h2>
-          <button class="excluir-btn" @click="excluirConta">EXCLUIR CONTA</button>
+  <div class="container">
+    <!-- Sidebar de perfil -->
+    <div class="sidebar">
+      <label for="upload">
+        <div
+          class="profile-pic"
+          :style="{
+            backgroundImage: user.image ? 'url(' + user.image + ')' : '',
+            backgroundSize: 'cover'
+          }"
+        >
+          <span v-if="!user.image">{{ initials }}</span>
+          <input type="file" id="upload" @change="uploadImage" />
         </div>
+      </label>
 
-        <hr>
-
-        <div class="container-sections">
-          <div class="container-e">
-
-            <div class="section">
-              <label>Sobre Mim</label>
-              <textarea v-model="user.about" rows="4"></textarea>
-            </div>
-
-            <div class="section">
-              <label>Experiência Profissional</label>
-              <div class="field-row">
-                <input v-model="newExperience.local" placeholder="Local">
-                <input v-model="newExperience.funcao" placeholder="Atuação">
-              </div>
-              <button class="add-btn" @click="addExperience">Adicionar</button>
-              <div class="list">
-                <div class="list-item" v-for="(exp, index) in user.experiences" :key="index">
-                  {{ exp.local }} – {{ exp.funcao }} <button @click="removeExperience(index)">🗑</button>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-          <div class="container-d">
-
-            <div class="section">
-              <label>Habilidades</label>
-              <div class="div-skill">
-              <input v-model="newSkill" @keyup.enter="addSkill">
-              <button class="add-btn" @click="addSkill">+</button>
-              </div>
-              <div class="list">
-                <div class="list-item" v-for="(skill, index) in user.skills" :key="index">
-                  {{ skill }} <button @click="removeSkill(index)">🗑</button>
-                </div>
-              </div>
-            </div>
-
-            <div class="section">
-              <label>Formação Acadêmica</label>
-              <div class="field-row">
-                <input v-model="newEducation.instituicao" placeholder="Instituição">
-                <input v-model="newEducation.curso" placeholder="Curso">
-              </div>
-              <button class="add-btn" @click="addEducation">Adicionar</button>
-              <div class="list">
-                <div class="list-item" v-for="(edu, index) in user.education" :key="index">
-                  {{ edu.instituicao }} – {{ edu.curso }} <button @click="removeEducation(index)">🗑</button>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
+      <input v-model="user.name" placeholder="Nome" />
+      <input v-model="user.role" placeholder="Profissão" />
+      <input v-model="user.phone" placeholder="Telefone" />
+      <input v-model="user.email" placeholder="E-mail" />
+      <button class="save-btn" @click="saveProfile">SALVAR</button>
     </div>
 
+    <!-- Área principal -->
+    <div class="main">
+      <!-- Alerta visual -->
+      <div v-if="alertMessage" class="alert-custom" :class="alertType">
+        {{ alertMessage }}
+      </div>
+
+      <!-- Cabeçalho da seção -->
+      <div class="title">
+        <h2>Complete seu perfil profissional</h2>
+        <button class="excluir-btn" @click="excluirConta">
+          EXCLUIR CONTA
+        </button>
+      </div>
+
+      <hr />
+
+      <!-- Seções de conteúdo -->
+      <div class="container-sections">
+        <!-- Coluna esquerda: Sobre e Experiência -->
+        <div class="container-e">
+          <div class="section">
+            <label for="sobre">Sobre Mim</label>
+            <textarea id="sobre" v-model="user.about" rows="4"></textarea>
+          </div>
+
+          <div class="section">
+            <label>Experiência Profissional</label>
+            <div class="field-row">
+              <input
+                v-model="newExperience.local"
+                placeholder="Local"
+              />
+              <input
+                v-model="newExperience.funcao"
+                placeholder="Atuação"
+              />
+            </div>
+            <button class="add-btn" @click="addExperience">
+              Adicionar
+            </button>
+
+            <div class="list">
+              <div
+                class="list-item"
+                v-for="(exp, index) in user.experiences"
+                :key="index"
+              >
+                {{ exp.local }} – {{ exp.funcao }}
+                <button @click="removeExperience(index)">🗑</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Coluna direita: Habilidades e Formação -->
+        <div class="container-d">
+          <div class="section">
+            <label>Habilidades</label>
+            <div class="div-skill">
+              <input
+                v-model="newSkill"
+                @keyup.enter="addSkill"
+                placeholder="Nova habilidade"
+              />
+              <button class="add-btn" @click="addSkill">+</button>
+            </div>
+
+            <div class="list">
+              <div
+                class="list-item"
+                v-for="(skill, index) in user.skills"
+                :key="index"
+              >
+                {{ skill }}
+                <button @click="removeSkill(index)">🗑</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="section">
+            <label>Formação Acadêmica</label>
+            <div class="field-row">
+              <input
+                v-model="newEducation.instituicao"
+                placeholder="Instituição"
+              />
+              <input
+                v-model="newEducation.curso"
+                placeholder="Curso"
+              />
+            </div>
+            <button class="add-btn" @click="addEducation">
+              Adicionar
+            </button>
+
+            <div class="list">
+              <div
+                class="list-item"
+                v-for="(edu, index) in user.education"
+                :key="index"
+              >
+                {{ edu.instituicao }} – {{ edu.curso }}
+                <button @click="removeEducation(index)">🗑</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
+
 <style scoped>
+
+.alert-custom {
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 1rem;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.alert-custom.success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.alert-custom.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+
     * {
       box-sizing: border-box;
     }
