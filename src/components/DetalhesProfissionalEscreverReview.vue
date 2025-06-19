@@ -4,10 +4,24 @@ import BarraNav from './BarraNav.vue'
 import BotaoQuadrado from './BotaoQuadrado.vue'
 import router from '@/router'
 
-const review = ref('');
+// Campos do formulário
+const review = ref('')
 const nota = ref(0)
 const hover = ref(0)
 
+// Alerta visual
+const alertMessage = ref('')
+const alertType = ref('') // 'success' ou 'error'
+
+function showAlert(msg, type = 'success') {
+  alertMessage.value = msg
+  alertType.value = type
+  setTimeout(() => {
+    alertMessage.value = ''
+  }, 5000)
+}
+
+// Dados do usuário
 const user = ref({
   name: '',
   role: '',
@@ -37,24 +51,22 @@ onMounted(() => {
 })
 
 function enviarReview() {
-
   if (review.value.length > 1000) {
-    alert('A avaliação deve ter no máximo 1000 caracteres.');
-    return;
+    showAlert('A avaliação deve ter no máximo 1000 caracteres.', 'error')
+    return
   }
 
   if (nota.value === 0) {
-    alert('Por favor, selecione uma quantidade de estrelas.');
-    return;
+    showAlert('Por favor, selecione uma quantidade de estrelas.', 'error')
+    return
   }
 
-  alert('Avaliação enviada!')
-  router.push('/reviews')
-
+  showAlert('Avaliação enviada com sucesso!', 'success')
+  setTimeout(() => {
+    router.push('/reviews')
+  }, 1500)
 }
-
 </script>
-
 
 <template>
 
@@ -86,7 +98,9 @@ function enviarReview() {
       </div>
       
       <div class="main">
-
+      <div v-if="alertMessage" class="alert-custom" :class="alertType">
+      {{ alertMessage }}
+        </div>
         <div class="title">
           <h2>Avaliar</h2>
           <RouterLink to="/profissional"> <button class="excluir-btn">VOLTAR</button> </RouterLink>
@@ -130,6 +144,27 @@ function enviarReview() {
 </template>
 
 <style scoped>
+.alert-custom {
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 1rem;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.alert-custom.success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.alert-custom.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
     * {
       box-sizing: border-box;
     }
